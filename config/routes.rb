@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  scope "/socialtowers_api" do
+  scope "/ra_api" do
     resources :sessions
     resources :users
   end
