@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   scope "/ra_api" do
     resources :sessions
-    resources :users
+    resources :users, except: [:destroy]
+    resources :patient_prescriptions
+    resources :adverse_event_reportings, except: :destroy
+    resources :patients, except: [:destroy]
+    resources :ndcs, only: [:index, :show]
+    resources :medications, only: [:show, :index]
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
