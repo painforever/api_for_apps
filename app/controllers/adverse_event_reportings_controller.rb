@@ -1,0 +1,2 @@
+class AdverseEventReportingsController < ApplicationController
+end
