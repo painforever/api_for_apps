@@ -16,6 +16,11 @@ class MedicationsController < ApplicationController
     render json: @medications, stauts: 200
   end
 
+  def find_by_drug_name
+    drug = Ndc.find_by(PROPRIETARYNAME: params[:drug_name])
+    ra_render drug
+  end
+
   private
   def set_patient
     @patient = Patient.find_by(patient_id: params[:patient_id]) if params.has_key? :patient_id

@@ -9,4 +9,12 @@ class ApplicationController < ActionController::Base
       render status: 500 and return false
     end
   end
+
+  def ra_render(obj)
+    if obj
+      render json: obj, status: 200
+    else
+      render json: "failed", status: 500
+    end
+  end
 end

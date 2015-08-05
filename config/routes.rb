@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :adverse_event_reportings, except: :destroy
     resources :patients, except: [:destroy]
     resources :ndcs, only: [:index, :show]
-    resources :medications, only: [:show, :index]
+    resources :medications, only: [:show, :index] do
+      get 'find_by_drug_name', on: :collection
+    end
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
