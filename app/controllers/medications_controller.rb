@@ -7,7 +7,6 @@ class MedicationsController < ApplicationController
         where("patient_prescription_items.drug_id = medications.drug_id AND
                patient_prescriptions.prescription_id = patient_prescription_items.prescription_id").order("patient_prescriptions.date_prescribed DESC")
 
-
     # rx_ids = @patient.patient_prescriptions.pluck(:prescription_id)
     # @medications = PatientPrescriptionItem.select("patient_prescription_items.* , ndc.PROPRIETARYNAME, patient_prescriptions.date_prescribed").
     #     from("patient_prescription_items, ndc, patient_prescriptions").where(prescription_id: rx_ids).
