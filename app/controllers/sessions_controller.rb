@@ -4,9 +4,9 @@ class SessionsController < ApplicationController
   def create
   	user = User.authenticate(params[:email], params[:password])
   	if user
-  		respond_with user, status: 201
+			render json: user, status: 201
   	else
-  		respond_with status: 500
+  		render json: "", status: 500
   	end
   end
 
