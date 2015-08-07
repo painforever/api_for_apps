@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :ndcs, only: [:index, :show]
     resources :medications, only: [:show, :index] do
       get 'find_by_drug_name', on: :collection
+      get 'upload_drug_photo', on: :collection
     end
   end
   
