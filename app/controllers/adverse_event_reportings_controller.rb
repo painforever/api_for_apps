@@ -14,4 +14,13 @@ class AdverseEventReportingsController < ApplicationController
     @rx = PatientPrescription.find_by(prescription_id: @ad.prescription_id)
     render json: [@ad, @rx], status: 200
   end
+
+  def create
+    @av = AdverseEventReporting.create!(av_params)
+    render json: @av, status: 200
+  end
+
+  def av_params
+    params.require(:adverse_event_reporting).permit!
+  end
 end

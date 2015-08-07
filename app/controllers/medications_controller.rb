@@ -20,6 +20,10 @@ class MedicationsController < ApplicationController
     ra_render drug
   end
 
+  def show
+    render json: Medication.find(params[:id]), status: 200
+  end
+
   private
   def set_patient
     @patient = Patient.find_by(patient_id: params[:patient_id]) if params.has_key? :patient_id
