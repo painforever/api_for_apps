@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :patient_prescriptions
     resources :adverse_event_reportings, except: :destroy
     resources :patients, except: [:destroy]
+    resources :pharmacies, except: [:destroy, :update] do
+      get 'find_pharmacies', on: :collection
+    end
+
     resources :ndcs, only: [:index, :show]
     resources :medications, only: [:show, :index] do
       get 'find_by_drug_name', on: :collection
