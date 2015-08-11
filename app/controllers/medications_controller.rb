@@ -24,6 +24,13 @@ class MedicationsController < ApplicationController
     render json: Medication.find(params[:id]), status: 200
   end
 
+  def upload_drug_photo
+    user = User.find(params[:user_id])
+    user.avatar = params[:drug_photo]
+    user.save
+    render nothing: true
+  end
+
   private
   def set_patient
     @patient = Patient.find_by(patient_id: params[:patient_id]) if params.has_key? :patient_id
