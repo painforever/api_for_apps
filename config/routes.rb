@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resources :users, except: [:destroy]
     resources :patient_prescriptions
     resources :adverse_event_reportings, except: :destroy
-    resources :patients, except: [:destroy]
+    resources :patients, except: [:destroy] do
+      post "joint_report", on: :collection
+    end
     resources :pharmacies, except: [:destroy, :update] do
       get 'find_pharmacies', on: :collection
     end
