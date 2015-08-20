@@ -16,7 +16,8 @@ class MedicationsController < ApplicationController
   end
 
   def find_by_drug_name
-    drug = Ndc.find_by(PROPRIETARYNAME: params[:drug_name])
+    #drug = Ndc.find_by(PROPRIETARYNAME: params[:drug_name])
+    drug = Medication.find_by(drug_name: params[:drug_name])
     ra_render drug
   end
 
@@ -25,9 +26,9 @@ class MedicationsController < ApplicationController
   end
 
   def upload_drug_photo
-    user = User.find(params[:user_id])
-    user.avatar = params[:drug_photo]
-    user.save
+    item = PatientPrescriptionItem.find(params[:item_id])
+    item.drug_photo = params[:drug_photo]
+    item.save
     render nothing: true
   end
 

@@ -8,7 +8,7 @@ class PatientPrescriptionsController < ApplicationController
         params[:patient_prescription_item][:prescription_id] = rx.prescription_id
         item = PatientPrescriptionItem.new(item_params)
         item.save!
-        render json: "", status: 200
+        render json: item, status: 200
       rescue
         render json: "", status: 500 and return
       end
