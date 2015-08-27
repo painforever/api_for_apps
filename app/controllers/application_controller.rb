@@ -18,4 +18,12 @@ class ApplicationController < ActionController::Base
       render json: "failed", status: 500
     end
   end
+
+  def render_obj(obj)
+    if obj
+      render json: {'status'=>'200', 'result'=>obj, 'msg'=>'good'}
+    else
+      render json: {'status'=>'404', 'result'=>'', 'msg'=>'No'}
+    end
+  end
 end

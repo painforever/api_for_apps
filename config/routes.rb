@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   scope "/ra_api" do
     resources :sessions
-    resources :users, except: [:destroy]
+    resources :users, except: [:destroy] do
+      post 'upload_avatar', on: :collection
+      post 'patient_signup', on: :collection
+      get 'check_email_repeat', on: :collection
+    end
     resources :patient_prescriptions
     resources :adverse_event_reportings, except: :destroy
     resources :patients, except: [:destroy] do
