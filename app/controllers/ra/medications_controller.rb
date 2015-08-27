@@ -1,4 +1,4 @@
-class MedicationsController < ApplicationController
+class Ra::MedicationsController < ApplicationController
   before_action :set_patient
   def index
     rx_ids = @patient.patient_prescriptions.pluck(:prescription_id)

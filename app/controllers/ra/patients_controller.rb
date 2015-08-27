@@ -1,4 +1,4 @@
-class PatientsController < ApplicationController
+class Ra::PatientsController < ApplicationController
   def joint_report
     ppu=PatientPrescriptionUse.new(hurt_position: params[:part], patient_id: params[:patient_id],
                                   tender: params[:tender], swollen: params[:swollen], pain: params[:pain])

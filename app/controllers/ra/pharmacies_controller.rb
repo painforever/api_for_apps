@@ -1,4 +1,4 @@
-class PharmaciesController < ApplicationController
+class Ra::PharmaciesController < ApplicationController
   def index
 
   end

@@ -1,4 +1,4 @@
-class AdverseEventReportingsController < ApplicationController
+class Ra::AdverseEventReportingsController < ApplicationController
   def index
     @ads = AdverseEventReporting
                .select("DISTINCT(adverse_event_reporting.id), adverse_event_reporting.*, medications.drug_name, medications.drug_id, patient_prescription_items.drug_photo")

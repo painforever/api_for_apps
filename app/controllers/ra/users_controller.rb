@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Ra::UsersController < ApplicationController
   def update_password
     new_user=User.find_by_user_id(params[:user_id]).update(email_address: params[:email], password: params[:new_password])
     respond_to do |format|

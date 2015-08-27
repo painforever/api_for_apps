@@ -1,4 +1,4 @@
-class PatientPrescriptionsController < ApplicationController
+class Ra::PatientPrescriptionsController < ApplicationController
   before_action :set_patient
   def create
     ActiveRecord::Base.transaction do
