@@ -28,5 +28,6 @@ Rails.application.routes.draw do
     resources :npis do
       get 'search_doctor', on: :collection
     end
+    resources :patient_provider_assignments
   end
 end

@@ -1,0 +1,2 @@
+module MyRxTracking::PatientProviderAssignmentsHelper
+end

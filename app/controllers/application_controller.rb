@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
   skip_before_filter  :verify_authenticity_token
   #before_action :auth_token
 
+  def render_proc_200
+    Proc.new {|obj| render json: obj, status: 200}
+  end
+
+  def render_proc_500
+    Proc.new {|obj| render json: obj, status: 500}
+  end
+
   def auth_token
     if !params.has_key? :token
       render status: 500 and return false
@@ -16,6 +24,14 @@ class ApplicationController < ActionController::Base
       render json: obj, status: 200
     else
       render json: "failed", status: 500
+    end
+  end
+
+  def render_when_save(obj)
+    if obj.persisted?
+      render_proc_200.call(obj)
+    else
+      obj.save ? render_proc_200.call(obj) : render_proc_500.call(obj)
     end
   end
 
