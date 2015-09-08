@@ -29,5 +29,7 @@ Rails.application.routes.draw do
       get 'search_doctor', on: :collection
     end
     resources :patient_provider_assignments
+    resources :patient_reported_medications
+    resources :medications
   end
 end

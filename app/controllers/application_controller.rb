@@ -42,4 +42,8 @@ class ApplicationController < ActionController::Base
       render json: {'status'=>'404', 'result'=>'', 'msg'=>'No'}
     end
   end
+
+  def current_user(user_id)
+    @user ||= User.find(user_id)
+  end
 end

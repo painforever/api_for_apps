@@ -1,0 +1,2 @@
+module MyRxTracking::MedicationsHelper
+end
