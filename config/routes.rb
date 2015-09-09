@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     end
     resources :patient_provider_assignments
     resources :patient_reported_medications
-    resources :medications
+    resources :medications do
+      get 'search_drug', on: :collection
+    end
   end
 end

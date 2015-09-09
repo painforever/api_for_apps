@@ -8,4 +8,5 @@ class PatientPrescriptionItem < ActiveRecord::Base
 
   #scopes
   scope :with_medications, -> {includes(:medication)}
+  scope :with_rxs, -> {includes(:patient_prescription)}
 end

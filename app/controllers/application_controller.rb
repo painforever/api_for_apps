@@ -46,4 +46,12 @@ class ApplicationController < ActionController::Base
   def current_user(user_id)
     @user ||= User.find(user_id)
   end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
+  def bad_request(param)
+    raise ActionController::BadRequest.new(param)
+  end
 end
