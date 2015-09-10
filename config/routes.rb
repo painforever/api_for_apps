@@ -33,5 +33,7 @@ Rails.application.routes.draw do
     resources :medications do
       get 'search_drug', on: :collection
     end
+
+    resources :rxs
   end
 end

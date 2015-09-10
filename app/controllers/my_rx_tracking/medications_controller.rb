@@ -1,13 +1,12 @@
 class MyRxTracking::MedicationsController < ApplicationController
+  include RxsFuncs
+
   def index
     #proc to construct the drug
     drug_proc = Proc.new {|name, dosage, date, type| {drug_name: name, dosage: dosage, date: date, type: type} }
     #get both Rx drugs and self-added drugs
-    bad_request(params) if !params.has_key? :patient_id
-    patient_id = params[:patient_id].strip.chomp
-    rx_ids = PatientPrescription.where(patient_id: patient_id).pluck(:prescription_id)
-    rx_drugs = PatientPrescriptionItem.with_rxs.with_medications.where(prescription_id: rx_ids)
-    added_drugs = PatientReportedMedication.with_medications.where(patient_id: patient_id)
+    rx_drugs = get_patient_rxs
+    added_drugs = get_added_drugs
     all_drugs ||= []
     rx_drugs.each do |rx_drug|
       drug = drug_proc.call rx_drug.medication.drug_name, rx_drug.dosage, rx_drug.patient_prescription.date_prescribed, 'rx'
