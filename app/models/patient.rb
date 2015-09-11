@@ -5,4 +5,6 @@ class Patient < ActiveRecord::Base
   has_many :patient_provider_assignments
   has_many :npis, through: :patient_provider_assignments
   has_many :patient_reported_medications
+
+  scope :with_user, -> {includes(:user)}
 end
