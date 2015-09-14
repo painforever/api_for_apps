@@ -13,15 +13,24 @@ class MyRxTracking::ProfilesController < ApplicationController
     if user.password != params[:user][:old_password]
       render status: 401, json: 'Password is not correct!'
     else
-      if user.update(user_params)
-        render status: :ok, json: user
-      else
-        render status: 500, json: ''
-      end
+      render_by_boolean user.update(user_params), user
     end
   end
 
+  def update_profile
+    user = User.find(params[:user_id])
+    flag = user.update(user_params)
+    render_by_boolean flag, user
+  end
+
+  # def upload_avatar
+  #   user = User.find(params[:user_id])
+  #   user.avatar = params[:avatar]
+  #   user.save
+  #   render nothing: true
+  # end
+
   def user_params
-    params.require(:user).permit(:email_address, :cell_phone_number, :password)
+    params.require(:user).permit!
   end
 end

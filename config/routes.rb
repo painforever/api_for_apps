@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
 
     resources :rxs
-    resources :profiles
+    resources :profiles do
+      patch 'update_profile', on: :collection
+    end
   end
 end
