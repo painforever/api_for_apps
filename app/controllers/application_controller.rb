@@ -51,6 +51,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def render_obj_with_200(obj)
+    if obj
+      render json: {'status'=>'200', 'result'=>obj, 'msg'=>'good'}, status: 200
+    else
+      render json: {'status'=>'404', 'result'=>{}, 'msg'=>'No'}, status: 200
+    end
+  end
+
   def current_user(user_id)
     @user ||= User.find(user_id)
   end

@@ -23,12 +23,12 @@ class MyRxTracking::ProfilesController < ApplicationController
     render_by_boolean flag, user
   end
 
-  # def upload_avatar
-  #   user = User.find(params[:user_id])
-  #   user.avatar = params[:avatar]
-  #   user.save
-  #   render nothing: true
-  # end
+  def upload_avatar
+    user = User.find(params[:id])
+    user.avatar = params[:avatar]
+    user.save
+    render nothing: true
+  end
 
   def user_params
     params.require(:user).permit!

@@ -19,6 +19,13 @@ class MyRxTracking::MedicationsController < ApplicationController
     render_proc_200.call(all_drugs)
   end
 
+  def upload_drug_photo
+    item = PatientReportedMedication.find(params[:id])
+    item.photo = params[:drug_photo]
+    item.save
+    render nothing: true
+  end
+
   def create
     prm = PatientReportedMedication.new(prm_params)
     render_when_save(prm)
@@ -30,7 +37,7 @@ class MyRxTracking::MedicationsController < ApplicationController
 
   def search_drug
     drug = Medication.find_by(drug_name: params[:drug_name])
-    render_obj(drug)
+    render_obj_with_200(drug)
   end
 
 end

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
+
   self.primary_key='user_id'
 
   belongs_to :patient, foreign_key: 'patient_id'

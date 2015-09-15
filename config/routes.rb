@@ -32,11 +32,13 @@ Rails.application.routes.draw do
     resources :patient_reported_medications
     resources :medications do
       get 'search_drug', on: :collection
+      post 'upload_drug_photo', on: :collection
     end
 
     resources :rxs
     resources :profiles do
       patch 'update_profile', on: :collection
+      post 'upload_avatar', on: :collection
     end
   end
 end
