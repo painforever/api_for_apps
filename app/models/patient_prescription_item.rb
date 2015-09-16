@@ -5,6 +5,7 @@ class PatientPrescriptionItem < ActiveRecord::Base
 
   belongs_to :patient_prescription, foreign_key: :prescription_id
   belongs_to :medication, foreign_key: :drug_id
+  has_one :patient_prescription_use, foreign_key: :prescription_instance_id
 
   #scopes
   scope :with_medications, -> {includes(:medication)}

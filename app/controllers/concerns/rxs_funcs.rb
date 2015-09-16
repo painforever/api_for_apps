@@ -10,7 +10,7 @@ module RxsFuncs
   def get_patient_rxs
     check_bad_request
     rx_ids = PatientPrescription.where(patient_id: @patient_id).pluck(:prescription_id)
-    rx_drugs = PatientPrescriptionItem.with_rxs.with_medications.where(prescription_id: rx_ids)
+    rx_drugs = PatientPrescriptionItem.with_rxs.with_medications.where(prescription_id: rx_ids, is_finished: 'no')
   end
 
   def get_added_drugs
