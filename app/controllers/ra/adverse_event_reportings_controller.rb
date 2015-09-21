@@ -1,10 +1,9 @@
 class Ra::AdverseEventReportingsController < ApplicationController
   def index
     @ads = AdverseEventReporting
-               .select("DISTINCT(adverse_event_reporting.id), adverse_event_reporting.*, medications.drug_name, medications.drug_id, patient_prescription_items.drug_photo")
+               .select("DISTINCT(adverse_event_reporting.id), adverse_event_reporting.*, medications.drug_name, medications.drug_id, patient_prescription_items.*")
                .where(patient_id: params[:patient_id]).where("adverse_event_reporting.drug_id = medications.drug_id AND patient_prescription_items.drug_id = adverse_event_reporting.drug_id AND medications.drug_id = patient_prescription_items.drug_id")
                .from("adverse_event_reporting, medications, patient_prescription_items").order("adverse_event_reporting.created_at DESC")
-    puts "jdkjsdjsklldksjksjkjdlksjdlksj"
     render json: @ads, status: 200
   end
 
