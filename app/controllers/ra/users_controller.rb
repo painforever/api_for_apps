@@ -1,6 +1,7 @@
 class Ra::UsersController < ApplicationController
   def update_password
     new_user=User.find_by_user_id(params[:user_id]).update(email_address: params[:email], password: params[:new_password])
+    puts new_user.inspect
     respond_to do |format|
       if new_user
         format.json {render json: "yes"}

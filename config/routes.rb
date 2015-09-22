@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post 'upload_avatar', on: :collection
       post 'patient_signup', on: :collection
       get 'check_email_repeat', on: :collection
+      post 'update_password', on: :collection
     end
     resources :patient_prescriptions
     resources :adverse_event_reportings, except: :destroy
