@@ -3,7 +3,10 @@ class MyRxTracking::MedicationsController < ApplicationController
 
   def index
     #proc to construct the drug
-    drug_proc = Proc.new {|name, dosage, date, type, time_of_day, days_of_treatment| {drug_name: name, dosage: dosage, date: date, type: type, time_of_day: time_of_day, days_of_treatment: days_of_treatment} }
+    drug_proc = Proc.new {|name, dosage, date, type, time_of_day, days_of_treatment, remote_drug_photo_url| {drug_name: name,
+                                                                                                             dosage: dosage, date: date,
+                                                                                                             type: type, time_of_day: time_of_day,
+                                                                                                             days_of_treatment: days_of_treatment, remote_drug_photo_url: remote_drug_photo_url} }
     #get both Rx drugs and self-added drugs
     rx_drugs = get_patient_rxs
     added_drugs = get_added_drugs
@@ -14,17 +17,22 @@ class MyRxTracking::MedicationsController < ApplicationController
       all_drugs.push drug
     end
     added_drugs.each do |added_drug|
-      drug = drug_proc.call added_drug.medication.drug_name, added_drug.dosage, added_drug.prescribed_date, 'added', '', ''
+      drug = drug_proc.call added_drug.medication.drug_name, added_drug.dosage, added_drug.prescribed_date, 'added', '', '', added_drug.remote_drug_photo_url
       all_drugs.push drug
     end
     render_proc_200.call(all_drugs)
   end
 
   def upload_drug_photo
-    item = PatientReportedMedication.find(params[:id])
-    item.photo = params[:drug_photo]
-    item.save
-    render nothing: true
+    # item = PatientReportedMedication.find(params[:id])
+    # item.photo = params[:drug_photo]
+    # item.save
+    # render nothing: true
+    update_drug_photo('photo')
+  end
+
+  def update_drug_remote_url
+    update_drug_photo('remote_drug_photo_url')
   end
 
   def create
@@ -58,6 +66,29 @@ class MyRxTracking::MedicationsController < ApplicationController
   def search_drug
     drug = Medication.find_by(drug_name: params[:drug_name])
     render_obj_with_200(drug)
+  end
+
+  def async_search_drug
+    base_url = 'http://www.goodrx.com/'
+
+    drug = params[:drug].to_s.downcase
+    require 'open-uri'
+    begin
+      html = Nokogiri::HTML(open(base_url+drug))
+      res = html.xpath("//img").first.attributes["src"].value.to_s
+      render_obj_with_200(res)
+    rescue
+      render status: 200, json: 'drug not found'
+    end
+  end
+
+  private
+  def update_drug_photo(column)
+    item = PatientReportedMedication.find(params[:id])
+    #item.photo = params[:drug_photo]
+    item.send("#{column}=", params[:drug_photo])
+    item.save
+    render nothing: true
   end
 
 end

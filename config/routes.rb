@@ -34,7 +34,9 @@ Rails.application.routes.draw do
     resources :medications do
       get 'search_drug', on: :collection
       post 'upload_drug_photo', on: :collection
+      post 'update_drug_remote_url', on: :collection
       post 'take_drug', on: :collection
+      get 'async_search_drug', on: :collection
     end
 
     resources :rxs
