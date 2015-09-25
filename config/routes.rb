@@ -29,7 +29,10 @@ Rails.application.routes.draw do
     resources :npis do
       get 'search_doctor', on: :collection
     end
-    resources :patient_provider_assignments
+    resources :patient_provider_assignments do
+      get 'can_add', on: :collection
+    end
+
     resources :patient_reported_medications
     resources :medications do
       get 'search_drug', on: :collection

@@ -11,6 +11,11 @@ class MyRxTracking::PatientProviderAssignmentsController < ApplicationController
     render json: npis, status: 200
   end
 
+  def can_add
+    res = PatientProviderAssignment.where(patient_id: params[:patient_id], provider_npi: params[:provider_npi])
+    render_obj_with_200(res)
+  end
+
   def patient_provider_assignment_params
     params.require(:patient_provider_assignment).permit!
   end

@@ -24,10 +24,6 @@ class MyRxTracking::MedicationsController < ApplicationController
   end
 
   def upload_drug_photo
-    # item = PatientReportedMedication.find(params[:id])
-    # item.photo = params[:drug_photo]
-    # item.save
-    # render nothing: true
     update_drug_photo('photo')
   end
 
@@ -85,7 +81,6 @@ class MyRxTracking::MedicationsController < ApplicationController
   private
   def update_drug_photo(column)
     item = PatientReportedMedication.find(params[:id])
-    #item.photo = params[:drug_photo]
     item.send("#{column}=", params[:drug_photo])
     item.save
     render nothing: true
