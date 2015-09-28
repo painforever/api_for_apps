@@ -11,15 +11,18 @@ class MyRxTracking::MedicationsController < ApplicationController
     rx_drugs = get_patient_rxs
     added_drugs = get_added_drugs
     all_drugs ||= []
+
+    added_drugs.each do |added_drug|
+      drug = drug_proc.call added_drug.medication.drug_name, added_drug.dosage, added_drug.prescribed_date, 'added', '', '', added_drug.remote_drug_photo_url
+      all_drugs.push drug
+    end
+
     rx_drugs.each do |rx_drug|
       drug = drug_proc.call rx_drug.medication.drug_name, rx_drug.dosage, rx_drug.patient_prescription.date_prescribed, 'rx', rx_drug.time_of_day, rx_drug.days_of_treatment
       drug[:rx_item_id] = rx_drug.prescription_item_id
       all_drugs.push drug
     end
-    added_drugs.each do |added_drug|
-      drug = drug_proc.call added_drug.medication.drug_name, added_drug.dosage, added_drug.prescribed_date, 'added', '', '', added_drug.remote_drug_photo_url
-      all_drugs.push drug
-    end
+
     render_proc_200.call(all_drugs)
   end
 

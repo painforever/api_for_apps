@@ -15,7 +15,7 @@ module RxsFuncs
 
   def get_added_drugs
     check_bad_request
-    added_drugs = PatientReportedMedication.with_medications.where(patient_id: @patient_id)
+    added_drugs = PatientReportedMedication.with_medications.where(patient_id: @patient_id).order(:prescribed_date)
   end
 
   def set_patient_id
