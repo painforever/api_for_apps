@@ -51,5 +51,6 @@ Rails.application.routes.draw do
       post 'patient_signup', on: :collection
       get 'check_email_repeat', on: :collection
     end
+    resources :adverse_event_reportings
   end
 end

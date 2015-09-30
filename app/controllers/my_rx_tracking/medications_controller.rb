@@ -3,27 +3,32 @@ class MyRxTracking::MedicationsController < ApplicationController
 
   def index
     #proc to construct the drug
-    drug_proc = Proc.new {|name, dosage, date, type, time_of_day, days_of_treatment, remote_drug_photo_url| {drug_name: name,
+    drug_proc = Proc.new {|name, dosage, date, type, time_of_day, days_of_treatment, remote_drug_image_url, drug_id| {drug_name: name,
                                                                                                              dosage: dosage, date: date,
                                                                                                              type: type, time_of_day: time_of_day,
-                                                                                                             days_of_treatment: days_of_treatment, remote_drug_photo_url: remote_drug_photo_url} }
+                                                                                                             days_of_treatment: days_of_treatment, remote_drug_photo_url: remote_drug_image_url,
+                                                                                                                      drug_id: drug_id} }
     #get both Rx drugs and self-added drugs
     rx_drugs = get_patient_rxs
     added_drugs = get_added_drugs
     all_drugs ||= []
 
     added_drugs.each do |added_drug|
-      drug = drug_proc.call added_drug.medication.drug_name, added_drug.dosage, added_drug.prescribed_date, 'added', '', '', added_drug.remote_drug_photo_url
+      drug = drug_proc.call added_drug.medication.drug_name, added_drug.dosage, added_drug.prescribed_date, 'added', '', '', added_drug.remote_drug_photo_url, added_drug.drug_id
       all_drugs.push drug
     end
 
     rx_drugs.each do |rx_drug|
-      drug = drug_proc.call rx_drug.medication.drug_name, rx_drug.dosage, rx_drug.patient_prescription.date_prescribed, 'rx', rx_drug.time_of_day, rx_drug.days_of_treatment
+      drug = drug_proc.call rx_drug.medication.drug_name, rx_drug.dosage, rx_drug.patient_prescription.date_prescribed, 'rx', rx_drug.time_of_day, rx_drug.days_of_treatment, rx_drug.remote_drug_image_url, rx_drug.drug_id
       drug[:rx_item_id] = rx_drug.prescription_item_id
       all_drugs.push drug
     end
 
     render_proc_200.call(all_drugs)
+  end
+
+  def show
+    render json: Medication.find(params[:id]), status: 200
   end
 
   def upload_drug_photo

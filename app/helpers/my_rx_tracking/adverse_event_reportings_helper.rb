@@ -1,0 +1,2 @@
+module MyRxTracking::AdverseEventReportingsHelper
+end
