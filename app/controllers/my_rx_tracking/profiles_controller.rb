@@ -3,9 +3,8 @@ class MyRxTracking::ProfilesController < ApplicationController
     patient_id = params[:patient_id]
     patient = Patient.with_user.find_by(patient_id: patient_id)
     contact_info = patient.user
-    insurance_info = ''
-
-    render json: {contact_info: contact_info, insurance_info: insurance_info}
+    insurance_info = patient.insurance_members.with_plan.first
+    render json: {contact_info: contact_info, insurance_info: insurance_info, plan: insurance_info.try(:insurance_plan), patient: patient}
   end
 
   def update
