@@ -165,6 +165,7 @@
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, RVM: ruby-2.1.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="eventmachine (v1.0.7, RVM: ruby-2.1.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v2.5.2, RVM: ruby-2.1.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="geokit (v1.10.0, RVM: ruby-2.1.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.3.5, RVM: ruby-2.1.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.7.0, RVM: ruby-2.1.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.3.1, RVM: ruby-2.1.5) [gem]" level="application" />
