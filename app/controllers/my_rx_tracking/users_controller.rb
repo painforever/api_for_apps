@@ -7,8 +7,8 @@ class MyRxTracking::UsersController < ApplicationController
     if patient.save
       user.patient_id = patient.patient_id
       user.save
+      UserMailer.send_mailer_myrxtracking(user).deliver_now
     end
-    UserMailer.send_mailer_myrxtracking(user).deliver_now
     respond_to do |format|
       format.json {
         render_obj(user)
@@ -25,6 +25,18 @@ class MyRxTracking::UsersController < ApplicationController
       else
         format.json {render json: "no"}
       end
+    end
+  end
+
+  def add_temp_password
+    user = User.find_by(email_address: params[:email])
+    temp_pass = User.generate_temp_password
+    #we update bothe temp pass and pass, which is to make it simple for settings
+    if user.update(temp_password: temp_pass, password: temp_pass)
+      UserMailer.temp_password(user).deliver_now
+      render_obj(user)
+    else
+      render status: 500
     end
   end
 

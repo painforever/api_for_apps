@@ -18,6 +18,12 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email_address, subject: "Your password has been changed.")
   end
 
+  def temp_password(user)
+    @user = user
+    @password = @user.temp_password
+    mail(to: @user.email_address, subject: "Your temp password has been assigned.")
+  end
+
   def get_server_url
   	"http://localhost:3000/"
   end

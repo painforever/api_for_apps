@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     resources :users do
       post 'patient_signup', on: :collection
       get 'check_email_repeat', on: :collection
+      post 'add_temp_password', on: :collection
     end
     resources :adverse_event_reportings
   end
