@@ -1,14 +1,6 @@
 class MyRxTracking::UsersController < ApplicationController
 
   def patient_signup
-    # if params[:token].nil?
-    #   respond_to do |format|
-    #     format.json {
-    #       render json: "Auth failed"
-    #       exit
-    #     }
-    #   end
-    # end
     patient = Patient.new(fname: params[:first_name], lname: params[:last_name], patient_email: params[:email], patient_id: Patient.maximum(:patient_id)+1)
     user = User.new(email_address: params[:email], password: params[:password], fname: params[:first_name],
                     lname: params[:last_name], race: "Unknown")
@@ -16,7 +8,7 @@ class MyRxTracking::UsersController < ApplicationController
       user.patient_id = patient.patient_id
       user.save
     end
-
+    UserMailer.send_mailer_myrxtracking(user).deliver_now
     respond_to do |format|
       format.json {
         render_obj(user)

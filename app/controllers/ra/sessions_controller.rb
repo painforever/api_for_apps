@@ -3,6 +3,7 @@ class Ra::SessionsController < ApplicationController
 	respond_to :json
   def create
   	user = User.authenticate(params[:email], params[:password])
+		#UserMailer.send_mailer(user).deliver_now
   	if user
 			render json: user, status: 201
   	else

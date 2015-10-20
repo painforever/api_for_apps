@@ -1,14 +1,9 @@
 class Ra::UsersController < ApplicationController
   def update_password
-    new_user=User.find_by_user_id(params[:user_id]).update(email_address: params[:email], password: params[:new_password])
-    puts new_user.inspect
-    respond_to do |format|
-      if new_user
-        format.json {render json: "yes"}
-      else
-        format.json {render json: "no"}
-      end
-    end
+    new_user=User.find_by_user_id(params[:user_id])
+    new_user.update(email_address: params[:email], password: params[:new_password])
+    UserMailer.change_password(new_user).deliver_now
+    ra_render new_user
   end
 
   def patient_signup
@@ -26,6 +21,7 @@ class Ra::UsersController < ApplicationController
     if patient.save
       user.patient_id = patient.patient_id
       user.save
+      UserMailer.send_mailer(user).deliver_now
     end
 
     respond_to do |format|
