@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   self.primary_key='user_id'
+  attr_accessor :old_password
 
   belongs_to :patient, foreign_key: 'patient_id'
   has_many :reminders
