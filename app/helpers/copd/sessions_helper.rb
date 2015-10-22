@@ -1,0 +1,2 @@
+module Copd::SessionsHelper
+end

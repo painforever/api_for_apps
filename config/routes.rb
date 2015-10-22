@@ -54,4 +54,9 @@ Rails.application.routes.draw do
     end
     resources :adverse_event_reportings
   end
+
+  namespace :copd do
+    resources :sessions
+    resources :rxs
+  end
 end
