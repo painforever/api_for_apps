@@ -63,6 +63,10 @@ class ApplicationController < ActionController::Base
     @user ||= User.find(user_id)
   end
 
+  def current_patient
+    @patient ||= Patient.find_by(patient_id: params[:patient_id])
+  end
+
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end

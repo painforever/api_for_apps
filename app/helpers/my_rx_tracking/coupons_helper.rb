@@ -1,0 +1,2 @@
+module MyRxTracking::CouponsHelper
+end

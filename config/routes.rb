@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   namespace :my_rx_tracking do
     resources :sessions
     resources :reminders
+    resources :coupons
     resources :npis do
       get 'search_doctor', on: :collection
     end
