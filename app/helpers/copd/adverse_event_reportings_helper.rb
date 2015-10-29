@@ -1,0 +1,2 @@
+module Copd::AdverseEventReportingsHelper
+end

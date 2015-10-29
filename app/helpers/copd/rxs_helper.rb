@@ -1,0 +1,2 @@
+module Copd::RxsHelper
+end
