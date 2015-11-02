@@ -62,4 +62,9 @@ Rails.application.routes.draw do
     resources :adverse_event_reportings
     resources :rxs
   end
+
+  namespace :diabetes do
+    resources :sessions, only: [:create, :destroy]
+    resources :users, only: [:create, :show, :update]
+  end
 end
