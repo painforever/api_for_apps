@@ -1,5 +1,5 @@
-class Diabetes::SessionsController < ApplicationController
+class Diabetes::SessionsController < AuthenticationsController
   def create
-    render json: {sb: :ok, result: 200}, status: 200
+    login
   end
 end
