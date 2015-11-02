@@ -66,5 +66,6 @@ Rails.application.routes.draw do
   namespace :diabetes do
     resources :sessions, only: [:create, :destroy]
     resources :users, only: [:create, :show, :update]
+    resources :labs
   end
 end
