@@ -18,6 +18,16 @@ module RxsFuncs
     added_drugs = PatientReportedMedication.with_medications.where(patient_id: @patient_id).order(:prescribed_date)
   end
 
+  def create_selfadd_drug
+    prm = PatientReportedMedication.new(prm_params)
+    render_when_save(prm)
+  end
+
+  def search_drug
+    drug = Medication.find_by(drug_name: params[:drug_name])
+    render_obj_with_200(drug)
+  end
+
   def set_patient_id
     @patient_id = params[:patient_id].strip.chomp
   end

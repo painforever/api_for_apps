@@ -58,7 +58,7 @@ Rails.application.routes.draw do
 
   namespace :copd do
     resources :sessions
-    resources :lab_results
+    resources :labresults
     resources :adverse_event_reportings
     resources :rxs
   end

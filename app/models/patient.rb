@@ -6,6 +6,7 @@ class Patient < ActiveRecord::Base
   has_many :npis, through: :patient_provider_assignments
   has_many :patient_reported_medications
   has_many :insurance_members
+  has_many :patient_tests
   #Coupon
   has_many :patient_coupons
   has_many :coupons, through: :patient_coupons
