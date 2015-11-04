@@ -1,6 +1,11 @@
 module RxsFuncs
   extend ActiveSupport::Concern
 
+  def search_drug
+    drug = Medication.find_by(drug_name: params[:drug_name])
+    render_obj_with_200(drug)
+  end
+
   private
   def check_bad_request
     bad_request(params) if !params.has_key? :patient_id
@@ -23,9 +28,12 @@ module RxsFuncs
     render_when_save(prm)
   end
 
-  def search_drug
-    drug = Medication.find_by(drug_name: params[:drug_name])
-    render_obj_with_200(drug)
+  def search_drug_in_med_and_ndc(drug_name = '')
+    drug = Medication.find_by(drug_name: drug_name)
+    unless drug
+      drug = Ndc.where(PROPRIETARYNAME: drug_name).where.not(drug_id: nil).first
+    end
+    drug
   end
 
   def set_patient_id

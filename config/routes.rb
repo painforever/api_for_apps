@@ -59,7 +59,9 @@ Rails.application.routes.draw do
   namespace :copd do
     resources :sessions
     resources :labresults
-    resources :adverse_event_reportings
+    resources :adverse_event_reportings do
+      get 'search_drug', on: :collection
+    end
     resources :rxs
   end
 
