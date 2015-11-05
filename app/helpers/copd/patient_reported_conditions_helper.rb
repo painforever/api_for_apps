@@ -1,0 +1,2 @@
+module Copd::PatientReportedConditionsHelper
+end

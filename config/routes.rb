@@ -62,7 +62,10 @@ Rails.application.routes.draw do
     resources :adverse_event_reportings do
       get 'search_drug', on: :collection
     end
+
+    resources :excerbations
     resources :rxs
+    resources :patient_reported_conditions
   end
 
   namespace :diabetes do

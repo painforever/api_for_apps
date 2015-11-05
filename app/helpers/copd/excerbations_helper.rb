@@ -1,0 +1,2 @@
+module Copd::ExcerbationsHelper
+end

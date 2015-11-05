@@ -7,6 +7,7 @@ class Patient < ActiveRecord::Base
   has_many :patient_reported_medications
   has_many :insurance_members
   has_many :patient_tests
+  has_many :patient_reported_conditions
   #Coupon
   has_many :patient_coupons
   has_many :coupons, through: :patient_coupons
