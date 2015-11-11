@@ -1,0 +1,2 @@
+module Diabetes::UsersHelper
+end

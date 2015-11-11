@@ -70,7 +70,10 @@ Rails.application.routes.draw do
 
   namespace :diabetes do
     resources :sessions, only: [:create, :destroy]
-    resources :users, only: [:create, :show, :update]
+    resources :users, only: [:create, :show, :update] do
+      post 'patient_signup', on: :collection
+      get 'check_email_repeat', on: :collection
+    end
     resources :labs
   end
 end
