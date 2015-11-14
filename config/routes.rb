@@ -75,5 +75,7 @@ Rails.application.routes.draw do
       get 'check_email_repeat', on: :collection
     end
     resources :labs
+    resources :rxs
+    resources :medications
   end
 end

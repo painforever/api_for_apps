@@ -1,0 +1,2 @@
+module Diabetes::RxsHelper
+end
