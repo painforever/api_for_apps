@@ -53,7 +53,9 @@ Rails.application.routes.draw do
       get 'check_email_repeat', on: :collection
       post 'add_temp_password', on: :collection
     end
-    resources :adverse_event_reportings
+    resources :adverse_event_reportings do 
+      post 'upload_photo', on: :collection
+    end
   end
 
   namespace :copd do
