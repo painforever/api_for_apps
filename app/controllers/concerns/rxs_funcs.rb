@@ -39,4 +39,8 @@ module RxsFuncs
   def set_patient_id
     @patient_id = params[:patient_id].strip.chomp
   end
+
+  def prm_params
+    params.require(:prm).permit!
+  end
 end
