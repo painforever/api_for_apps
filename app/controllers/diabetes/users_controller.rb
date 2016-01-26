@@ -1,5 +1,7 @@
 class Diabetes::UsersController < ApplicationController
   include SignupFuncs
+  include ChangeInfoFuncs
+  
   def patient_signup
     sign_up
   end
