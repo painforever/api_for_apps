@@ -35,6 +35,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def render_with_persist(obj)
+    obj.persisted? ? render_proc_200.call(obj) : render_proc_500.call(obj)
+  end
+
   def render_by_boolean(flag, obj)
     if flag
       render json: obj, status: 200

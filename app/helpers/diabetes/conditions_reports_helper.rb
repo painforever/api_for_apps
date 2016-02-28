@@ -1,0 +1,2 @@
+module Diabetes::ConditionsReportsHelper
+end
