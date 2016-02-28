@@ -6,6 +6,7 @@ class Diabetes::ConditionsReportsController < ApplicationController
   end
 
   def index
+    
   end
 
   private
