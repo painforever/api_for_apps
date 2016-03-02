@@ -6,7 +6,7 @@ class Diabetes::ConditionsReportsController < ApplicationController
   end
 
   def index
-    
+    render json: PatientReportedCondition.where(patient_id: @patient.patient_id), status: :ok
   end
 
   private
