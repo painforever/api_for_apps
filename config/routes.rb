@@ -83,5 +83,6 @@ Rails.application.routes.draw do
     resources :rxs
     resources :medications
     resources :conditions_reports
+    resources :diet_reports
   end
 end
